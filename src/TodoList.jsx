@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import { generateClient } from 'aws-amplify/api';
-import * as mutations from './src/graphql/mutations';
-import { listTodos } from './src/graphql/queries';
+import * as mutations from './graphql/mutations';
+import { listTodos } from './graphql/queries';
 const client = generateClient();
 
 function TodoList() {
