@@ -7,9 +7,9 @@ import TodoList from './TodoList';
 function App({ signOut, user }) {
   return (
     <>
+    <h2 className='text-center my-3 text-[1.2rem]'> Amplified todo's List</h2>
     <TodoList />
-      <h1>Hello {user.username}</h1>
-      <button onClick={signOut}>Sign out</button>
+      <button onClick={signOut} className='p-1 bg-[red] rounded inline-block m-2  text-right'>Sign out</button>
     </>
   );
 }

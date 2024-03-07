@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import './App.css';
 import { generateClient } from 'aws-amplify/api';
 import * as mutations from './graphql/mutations';
 import { listTodos } from './graphql/queries';
@@ -26,7 +25,7 @@ function TodoList() {
 const addTodo = async (newTodo) => {
     if (newTodo.trim() !== '') {
       try {
-        const newTodoId = Math.floor(Math.random() * 1000000);
+        const newTodoId = Math.floor(Math.random() * 10000);
         const newTodoData = await client.graphql({
           query: mutations.createTodo,
           variables: {
@@ -37,8 +36,8 @@ const addTodo = async (newTodo) => {
           }
         });
   
-        const newTodoItem = newTodoData.data.createTodo; // Rename the variable
-        setTodos(prevTodos => [...prevTodos, newTodoItem]); // Use the renamed variable
+        const newTodoItem = newTodoData.data.createTodo; 
+        setTodos(prevTodos => [...prevTodos, newTodoItem]);
         setTodo('');
       } catch (error) {
         console.error('Error creating todo:', error);
@@ -76,16 +75,20 @@ const addTodo = async (newTodo) => {
   };
 
   return (
-    <div>
-      <input type="text" onChange={(e) => setTodo(e.target.value)} value={todo} />
-      <button onClick={() => addTodo(todo)}>Add todo</button>
+    <div className='m-auto w-[30rem]'>
+     <div className='text-center'>
+     <input type="text" onChange={(e) => setTodo(e.target.value)} value={todo} className='border-1 rounded bg-red-100 p-1 ' />
+      <button onClick={() => addTodo(todo)} className='py-1 px-2 bg-[green] rounded inline-block m-2 text-white'>Add todo</button>
+     </div>
       {todos.map((todoItem) => (
-        <div key={todoItem.id} style={{padding:'1rem', margin:'1rem',textAlign:'left'}}>
-          <li style={{listStyle:'none'}}>{todoItem.name}</li>
-          <button onClick={() => deleteTodo(todoItem.id)}>Delete</button>
-          <button onClick={() => updateTodo(todoItem.id, prompt('Enter new todo name:', todoItem.name))}>
+        <div key={todoItem.id} className='p-2 border rounded my-2'>
+          <li className='list-none'>{todoItem.name}</li>
+         <div className=' text-right p-1'>
+         <button onClick={() => deleteTodo(todoItem.id)} className='p-1 bg-[red] rounded inline-block m-2'>Delete</button>
+          <button onClick={() => updateTodo(todoItem.id, prompt('Enter new todo name:', todoItem.name))} className='py-1 px-2 bg-[green] rounded inline-block m-2 text-white'>
             Edit
           </button>
+         </div>
         </div>
       ))}
     </div>
