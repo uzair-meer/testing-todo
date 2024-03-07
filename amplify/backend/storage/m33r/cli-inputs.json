@@ -1,0 +1,14 @@
+{
+  "resourceName": "m33r",
+  "policyUUID": "db827386",
+  "bucketName": "meer-images",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}
