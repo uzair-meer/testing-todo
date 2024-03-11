@@ -50,6 +50,50 @@
       "service": "Cognito"
     }
   },
+  "function": {
+    "zairlambda": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "todomeer"
+        },
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "todomeer"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_zairlambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "zairlambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_zairlambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "zairlambda"
+        }
+      ]
+    }
+  },
   "storage": {
     "m33r": {
       "dependsOn": [],

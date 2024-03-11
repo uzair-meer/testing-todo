@@ -6,40 +6,44 @@ import { listTodos } from './graphql/queries';
 
 const client = generateClient();
 const img__url = `https://meer-images113026-staging.s3.eu-north-1.amazonaws.com/public/`
-function TodoList() {
+function TodoList({user}) {
   const [todo, setTodo] = useState('');
   const [todos, setTodos] = useState([]);
   const [fileData, setFileData] = useState();
   const [fileStatus, setFileStatus] = useState(false);
 
-
   useEffect(() => {
+    console.log(user.userId)
     const fetchTodos = async () => {
+
       try {
-        const result = await client.graphql({ query: listTodos });
+        const result = await client.graphql({
+          query: listTodos,
+          variables: { userId:user.userId }
+        });
+  
         const todosFromGraphQL = result.data.listTodos.items;
         setTodos(todosFromGraphQL);
       } catch (error) {
         console.error('Error fetching todos:', error);
       }
     };
-
+  
     fetchTodos();
   }, []);
+  
 
   const addTodoWithImage = async (newTodo, newFileData) => {
     if (newTodo.trim() !== '' && newFileData) {
       try {
-        // Upload the file
-         uploadData({
+        await uploadData({
           key: newFileData.name,
           data: newFileData,
           options: {
             accessLevel: 'guest',
           }
         });
-
-        // Create the todo with the associated image
+  
         const newTodoId = Math.floor(Math.random() * 10000);
         const newTodoData = await client.graphql({
           query: mutations.createTodo,
@@ -47,21 +51,25 @@ function TodoList() {
             input: {
               id: newTodoId.toString(),
               name: newTodo.trim(),
-              image: newFileData.name // Assuming the image field in GraphQL schema is named 'image'
+              image: newFileData.name,
+              userId: user.userId
             }
           }
         });
-
+  
         const newTodoItem = newTodoData.data.createTodo;
         setTodos(prevTodos => [...prevTodos, newTodoItem]);
         setTodo('');
-        setFileData(null);
+        setFileData(null); // Clear file data after adding todo
         setFileStatus(true);
+        setFileData(null); 
       } catch (error) {
         console.error('Error creating todo:', error);
       }
     }
-  }
+  };
+  
+
 
   const deleteTodo = async (id, imageName) => {
     try {

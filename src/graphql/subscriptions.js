@@ -7,6 +7,7 @@ export const onCreateTodo = /* GraphQL */ `
       id
       name
       image
+      userId
       createdAt
       updatedAt
       __typename
@@ -19,6 +20,7 @@ export const onUpdateTodo = /* GraphQL */ `
       id
       name
       image
+      userId
       createdAt
       updatedAt
       __typename
@@ -31,6 +33,49 @@ export const onDeleteTodo = /* GraphQL */ `
       id
       name
       image
+      userId
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onCreateUserTodoCount = /* GraphQL */ `
+  subscription OnCreateUserTodoCount(
+    $filter: ModelSubscriptionUserTodoCountFilterInput
+  ) {
+    onCreateUserTodoCount(filter: $filter) {
+      id
+      userID
+      count
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateUserTodoCount = /* GraphQL */ `
+  subscription OnUpdateUserTodoCount(
+    $filter: ModelSubscriptionUserTodoCountFilterInput
+  ) {
+    onUpdateUserTodoCount(filter: $filter) {
+      id
+      userID
+      count
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteUserTodoCount = /* GraphQL */ `
+  subscription OnDeleteUserTodoCount(
+    $filter: ModelSubscriptionUserTodoCountFilterInput
+  ) {
+    onDeleteUserTodoCount(filter: $filter) {
+      id
+      userID
+      count
       createdAt
       updatedAt
       __typename

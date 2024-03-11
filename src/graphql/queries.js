@@ -7,6 +7,7 @@ export const getTodo = /* GraphQL */ `
       id
       name
       image
+      userId
       createdAt
       updatedAt
       __typename
@@ -24,6 +25,39 @@ export const listTodos = /* GraphQL */ `
         id
         name
         image
+        userId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getUserTodoCount = /* GraphQL */ `
+  query GetUserTodoCount($id: ID!) {
+    getUserTodoCount(id: $id) {
+      id
+      userID
+      count
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listUserTodoCounts = /* GraphQL */ `
+  query ListUserTodoCounts(
+    $filter: ModelUserTodoCountFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserTodoCounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userID
+        count
         createdAt
         updatedAt
         __typename

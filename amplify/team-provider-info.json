@@ -20,6 +20,12 @@
       },
       "storage": {
         "m33r": {}
+      },
+      "function": {
+        "zairlambda": {
+          "deploymentBucketName": "amplify-amplify0fc430e577684-staging-113026-deployment",
+          "s3Key": "amplify-builds/zairlambda-2f4b6e704f726c516b47-build.zip"
+        }
       }
     }
   }

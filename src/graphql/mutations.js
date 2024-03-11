@@ -10,6 +10,7 @@ export const createTodo = /* GraphQL */ `
       id
       name
       image
+      userId
       createdAt
       updatedAt
       __typename
@@ -25,6 +26,7 @@ export const updateTodo = /* GraphQL */ `
       id
       name
       image
+      userId
       createdAt
       updatedAt
       __typename
@@ -40,6 +42,52 @@ export const deleteTodo = /* GraphQL */ `
       id
       name
       image
+      userId
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createUserTodoCount = /* GraphQL */ `
+  mutation CreateUserTodoCount(
+    $input: CreateUserTodoCountInput!
+    $condition: ModelUserTodoCountConditionInput
+  ) {
+    createUserTodoCount(input: $input, condition: $condition) {
+      id
+      userID
+      count
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateUserTodoCount = /* GraphQL */ `
+  mutation UpdateUserTodoCount(
+    $input: UpdateUserTodoCountInput!
+    $condition: ModelUserTodoCountConditionInput
+  ) {
+    updateUserTodoCount(input: $input, condition: $condition) {
+      id
+      userID
+      count
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteUserTodoCount = /* GraphQL */ `
+  mutation DeleteUserTodoCount(
+    $input: DeleteUserTodoCountInput!
+    $condition: ModelUserTodoCountConditionInput
+  ) {
+    deleteUserTodoCount(input: $input, condition: $condition) {
+      id
+      userID
+      count
       createdAt
       updatedAt
       __typename

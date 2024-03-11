@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "api": {
+      "todomeer": [
+        "Query",
+        "Mutation",
+        "Subscription"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}
